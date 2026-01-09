@@ -193,6 +193,9 @@ class SubmodelCodegen:
             render_kwargs["typehints"][list_items_arg] = f"Iterable[{self.get_se_typehint(list_item)}]"
             render_kwargs.update(before_init_content=embedded_se_classes,
                                  args_for_submodel_elements=[list_items_arg])
+            # hacky approach to set the type as somehow list_item_cls_name is camel-cased
+            if 'type_value_list_element' in render_kwargs['kwargs']:
+                render_kwargs['kwargs']['type_value_list_element'] = embedded_se_classes.split('(')[0].split('class ')[1]
         return self.render_cls_with_template(template, **render_kwargs)
 
     def gen_cls_for_se_collection(self,
