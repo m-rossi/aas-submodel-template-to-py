@@ -44,7 +44,7 @@
     {% if se_arg_typehint.startswith("Union") %}
         {% set types = se_arg_typehint.lstrip("Union").strip("[]").split(",") %}
 # Build a submodel element if a raw value was passed in the argument
-if {{ arg_for_se }} and not isinstance({{ arg_for_se }}, SubmodelElement):
+if {{ arg_for_se }} is not None and not isinstance({{ arg_for_se }}, SubmodelElement):
     {{ arg_for_se }}=self.{{ types[-1] }}({{ arg_for_se }})
     {% elif se_arg_typehint.lstrip("Iterable[").startswith("Union") %}
         {% set types = se_arg_typehint.lstrip("Iterable").strip("[]").lstrip("Union").strip("[]").split(",") %}
