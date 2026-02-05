@@ -1,3 +1,4 @@
+# ruff: noqa
 from typing import *
 import inspect
 from basyx.aas.model import *
