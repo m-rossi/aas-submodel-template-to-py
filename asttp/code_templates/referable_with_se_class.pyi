@@ -63,7 +63,6 @@ for se_arg in [{% for se in args_for_submodel_elements -%} {{ se }}{% if not loo
         embedded_submodel_elements.append(se_arg)
     elif isinstance(se_arg, Iterable):
         for n, element in enumerate(se_arg):
-            element.id_short = f"{element.id_short}{n}"
             embedded_submodel_elements.append(element)
     else:
         raise TypeError(f"Unknown type of value in submodel_element_args: {type(se_arg)}")
